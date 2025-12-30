@@ -1,6 +1,6 @@
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_text_splitters import Language
-from load_repo import get_repo
+from .load_repo import get_repo
 
 docs = get_repo()
 
@@ -12,5 +12,3 @@ python_splitter = RecursiveCharacterTextSplitter.from_language(
 
 texts = python_splitter.split_documents(docs)
 
-print(f"Original files: {len(docs)}")
-print(f"Resulting chunks: {len(texts)}")
