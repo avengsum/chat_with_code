@@ -1,6 +1,6 @@
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_text_splitters import Language
-from ingestion.load_repo import get_repo
+from load_repo import get_repo
 
 docs = get_repo()
 
