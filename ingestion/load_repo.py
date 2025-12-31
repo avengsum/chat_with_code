@@ -27,4 +27,6 @@ def get_repo():
         branch="main",
         file_filter=file_filter
     )
+    
+    return loader.load()
 
