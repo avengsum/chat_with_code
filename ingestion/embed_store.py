@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from langchain_pinecone import PineconeVectorStore
 from pinecone import Pinecone
-from .chunk_code import texts
+from .chunk_code import final_chunk
 
 load_dotenv()
 
@@ -24,10 +24,10 @@ embeddings = GoogleGenerativeAIEmbeddings(
 
 index_name = "chat-with-code"
 
-print("Uploading 348 chunks to pinecone cloud....")
+print(f"Uploading {len(final_chunk)} chunks to pinecone cloud....")
 
 vector_db = PineconeVectorStore.from_documents(
-  documents=texts,
+  documents=final_chunk,
   embedding=embeddings,
   index_name=index_name
 )

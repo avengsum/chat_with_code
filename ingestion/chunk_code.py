@@ -36,13 +36,6 @@ for doc in docs:
     final_chunk.extend(splitter.split_documents([doc]))
 
 
-print("Total chunks:", len(final_chunk))
-first_chunks = final_chunk[0]
-print("Chunk content:")
-print(first_chunks.page_content)
-print("Source file:", first_chunks.metadata.get("source"))
-print("Language:", first_chunks.metadata.get("language"))
-
 
 ## simple text spiliting used before 
 # python_splitter = RecursiveCharacterTextSplitter.from_language(
