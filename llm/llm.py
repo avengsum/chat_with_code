@@ -17,7 +17,7 @@ Google_api_key = os.getenv("GOOGLE_API_KEY")
 pinecone_api_key = os.getenv("PINECONE_API_KEY")
 
 llm = ChatGoogleGenerativeAI(
-  model="gemini-2.5-flash",
+  model="gemini-2.5-flash-lite",
   temperature = 0.1,
   max_retries= 2
 )

@@ -4,6 +4,14 @@ from langchain_community.document_loaders.parsers import LanguageParser
 from langchain_text_splitters import Language
 from .load_repo import get_repo
 
+try:
+   get_repo()
+   print("Repo is loaded")
+except Exception as e:
+   print(f"Error in loading repo {e}")
+   raise
+
+
 get_repo() ## get the repo from git
 
 SUPPORTED_EXTENSIONS = {
@@ -34,6 +42,9 @@ for doc in docs:
       chunk_overlap=200
     )
     final_chunk.extend(splitter.split_documents([doc]))
+
+  else:
+        print(f"⚠️ Skipping unsupported file: {doc.metadata.get('source')}")
 
 
 
