@@ -9,6 +9,7 @@ from langchain_classic.chains import create_retrieval_chain
 from langchain_classic.chains.combine_documents import create_stuff_documents_chain
 from langchain_classic.chains.history_aware_retriever import create_history_aware_retriever
 from langchain_core.messages import HumanMessage, AIMessage
+from langchain_core.rate_limiters import InMemoryRateLimiter
 import time
 
 load_dotenv()
@@ -16,10 +17,22 @@ load_dotenv()
 Google_api_key = os.getenv("GOOGLE_API_KEY")
 pinecone_api_key = os.getenv("PINECONE_API_KEY")
 
+## adding rate limiter
+
+rate_limiter = InMemoryRateLimiter(
+   requests_per_second=0.1, ## one request every 5 sec
+   check_every_n_second=0.1,
+   max_bucket_size=1 # Prevent bursts of requests
+)
+
 llm = ChatGoogleGenerativeAI(
   model="gemini-2.5-flash-lite",
   temperature = 0.1,
-  max_retries= 2
+  max_retries= 2,
+  rate_limiter=rate_limiter
+).with_retry(
+   stop_after_attempt=5.
+   wait_exponential_jitter=True # Wait longer after 429
 )
 
 ## this would create a question bassed on history
